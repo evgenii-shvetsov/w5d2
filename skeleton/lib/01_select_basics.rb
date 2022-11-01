@@ -66,3 +66,6 @@ def just_the_right_size
   execute(<<-SQL)
   SQL
 end
+
+
+# hello
