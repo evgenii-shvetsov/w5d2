@@ -105,7 +105,11 @@ def sparse_continents # sparsely means low population
   execute(<<-SQL)
   SELECT name, continent, population
   FROM countries
-  WHERE continent = 'Americas' AND population < 25000000;
+  WHERE continent  NOT IN (
+    SELECT continent
+    FROM countries
+    WHERE population >= 25000000
+  );
 
   SQL
 end
