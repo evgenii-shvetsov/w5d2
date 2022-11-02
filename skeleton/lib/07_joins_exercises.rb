@@ -101,7 +101,6 @@ def andrews_films_and_leads
     JOIN actors ON castings.actor_id = actors.id
     WHERE actors.name = 'Julie Andrews'
   ) AND ord = 1;
-
   SQL
 end
 
@@ -109,6 +108,12 @@ def prolific_actors
   # Obtain a list in alphabetical order of actors who've had at least 15
   # starring roles.
   execute(<<-SQL)
+  SELECT actors.name
+  FROM actors
+  JOIN actors ON castings.actor_id = actors.id
+  JOIN castings ON castings.movie_id = movies.id
+  GROUP BY actors.name
+  HAVING COUNT(movies.id);
   SQL
 end
 
